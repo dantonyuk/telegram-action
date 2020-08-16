@@ -1,6 +1,12 @@
 name: 'Telegram Notifier'
 description: 'Sending a notification to Telegram'
 author: 'Dmitry Antonyuk'
+inputs:
+  destination:
+    description: Chat/Channel ID to send notifications to
+    requests: true
+  token:
+    description: Bot token to be used to send notifications
 runs:
   using: 'docker'
   image: 'Dockerfile'
