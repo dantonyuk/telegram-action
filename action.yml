@@ -1,0 +1,6 @@
+name: 'Telegram Notifier'
+description: 'Sending a notification to Telegram'
+author: 'Dmitry Antonyuk'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
