@@ -13,7 +13,7 @@ def notify(message):
 
     requests.post(f'https://api.telegram.org/bot{token}/sendMessage', json={
         'chat_id': chat_id,
-        'parse_mode': 'MarkdownV2',
+        'parse_mode': 'HTML',
         'disable_web_page_preview': True,
         'text': message
     })
@@ -27,4 +27,6 @@ if __name__ == "__main__":
     if funcs:
         funcs[0]()
     else:
-        notify(f"{event_name} in [{env['GITHUB_REPOSITORY']}]({env['GITHUB_SERVER_URL']}/{env['GITHUB_REPOSITORY']})")
+        repo = env['GITHUB_REPOSITORY']
+        server = env['GITHUB_SERVER_URL']
+        notify(f'{event_name} in <a href="{server}/{repo}">{repo}</a>')
