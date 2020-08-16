@@ -8,8 +8,8 @@ def event_payload():
 
 
 def notify(message):
-    chat_id = os.environ['destination']
-    token = os.environ['token']
+    chat_id = os.environ['INPUT_DESTINATION']
+    token = os.environ['INPUT_TOKEN']
 
     requests.post(f'https://api.telegram.org/bot{token}/sendMessage', json={
         'chat_id': chat_id,
