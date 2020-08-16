@@ -1,13 +1,17 @@
 import os, sys, inspect
-import requests
 from pathlib import Path
 
 def event_payload():
+    import json
     event_path = os.environ['GITHUB_EVENT_PATH']
-    return Path(event_path).read_text()
+    contents = Path(event_path).read_text()
+    return json.loads(contents)
 
 
 def notify(message):
+    import requests
+    import textwrap
+
     chat_id = os.environ['INPUT_DESTINATION']
     token = os.environ['INPUT_TOKEN']
 
@@ -15,12 +19,31 @@ def notify(message):
         'chat_id': chat_id,
         'parse_mode': 'HTML',
         'disable_web_page_preview': True,
-        'text': message
+        'text': textwrap.dedent(message)
     })
+
+
+def handle_push():
+    payload = event_payload()
+
+    env = os.environ
+    event_name = env['GITHUB_EVENT_NAME']
+    repo = env['GITHUB_REPOSITORY']
+    server = env['GITHUB_SERVER_URL']
+    actor = env['GITHUB_ACTOR']
+
+    commits = '\n'.join([f"""\
+        <a href="{commit['url']}">{commit['id'][:8]}</a> {commit['message']}"""
+        for commit in payload['commits']])
+
+    notify(f"""\
+        {event_name} in <a href="{server}/{repo}">{repo}</a> by <a href="{server}/{actor}">{actor}</a>
+
+        Commits (<a href="{payload['compare']}">Diff</a>):\n""" + commits)
+
 
 if __name__ == "__main__":
     env = os.environ
-    print(env)
     event_name = os.environ['GITHUB_EVENT_NAME']
 
     members = inspect.getmembers(sys.modules[__name__])
