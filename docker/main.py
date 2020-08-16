@@ -34,7 +34,7 @@ def handle_push():
 
     commits = '\n'.join([f"""\
         <a href="{commit['url']}">{commit['id'][:8]}</a> {commit['message']}"""
-        for commit in payload['commits']])
+        for commit in payload['commits'][::-1]])
 
     notify(f"""\
         {event_name} in <a href="{server}/{repo}">{repo}</a> by <a href="{server}/{actor}">{actor}</a>
