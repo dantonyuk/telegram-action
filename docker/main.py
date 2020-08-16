@@ -11,7 +11,7 @@ def notify(message):
     chat_id = os.environ['destination']
     token = os.environ['token']
 
-    requests.post('', json={
+    requests.post(f'https://api.telegram.org/bot{token}/sendMessage', json={
         'chat_id': ,
         'parse_mode': 'MarkdownV2',
         'disable_web_page_preview': True,
