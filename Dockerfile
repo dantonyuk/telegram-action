@@ -1,3 +1,6 @@
 FROM dmitryantonyuk/telegram-action
 
-CMD [ "python", "main.py" ]
+ADD entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
