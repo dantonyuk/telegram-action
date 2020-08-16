@@ -28,6 +28,3 @@ if __name__ == "__main__":
         funcs[0]()
     else:
         notify(f"{event_name} in [{env['GITHUB_REPOSITORY']}]({env['GITHUB_SERVER_URL']}/{env['GITHUB_REPOSITORY']})")
-
-    print(contents)
-
