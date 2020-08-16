@@ -23,7 +23,9 @@ if __name__ == "__main__":
     print(env)
     event_name = os.environ['GITHUB_EVENT_NAME']
 
-    funcs = [obj for name, obj in inspect.getmembers(sys.modules[__name__]) if name == event_name]
+    members = inspect.getmembers(sys.modules[__name__])
+    func_name = f'handle_{event_name}'
+    funcs = [obj for name, obj in members if name == func_name]
     if funcs:
         funcs[0]()
     else:
