@@ -1,6 +1,6 @@
 Push into <a href="{{ repository.html_url }}">{{ repository.full_name }}</a> by <a href="{{ sender.html_url }}">{{ sender.login }}</a>
 
 Commits (<a href="{{ compare }}">Diff</a>):
-{% for comment in commits | reverse %}
+{% for commit in commits | reverse %}
 <a href="{{ commit.url }}">{{ commit.id | truncate(8, True, '') }}</a> {{ commit.message }}
 {% endfor %}
