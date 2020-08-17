@@ -1,4 +1,5 @@
 import os, sys, inspect
+from jinja2 import Environment, FileSystemLoader
 from pathlib import Path
 
 def event_payload():
@@ -6,6 +7,12 @@ def event_payload():
     event_path = os.environ['GITHUB_EVENT_PATH']
     contents = Path(event_path).read_text()
     return json.loads(contents)
+
+
+def render_template(name):
+    env = Environment(loader=FileSystemLoader('/templates'))
+    template = env.get_template(name + '.html')
+    return template.render(**event_payload())
 
 
 def notify(message):
@@ -24,38 +31,11 @@ def notify(message):
 
 
 def handle_push():
-    payload = event_payload()
-    env = os.environ
-
-    event_name = env['GITHUB_EVENT_NAME']
-    repo = env['GITHUB_REPOSITORY']
-    server = env['GITHUB_SERVER_URL']
-    actor = env['GITHUB_ACTOR']
-
-    commits = '\n'.join([f"""\
-        <a href="{commit['url']}">{commit['id'][:8]}</a> {commit['message']}"""
-        for commit in payload['commits'][::-1]])
-
-    notify(f"""\
-        {event_name} in <a href="{server}/{repo}">{repo}</a> by <a href="{server}/{actor}">{actor}</a>
-
-        Commits (<a href="{payload['compare']}">Diff</a>):\n""" + commits)
+    notify(render_template('push'))
 
 
 def handle_pull_request():
-    payload = event_payload()
-    env = os.environ
-
-    repo = env['GITHUB_REPOSITORY']
-    server = env['GITHUB_SERVER_URL']
-    actor = env['GITHUB_ACTOR']
-    action = payload['action']
-    pr = payload['pull_request']
-
-    notify(f"""\
-        PR #<a href="{pr['html_url']}">{pr['number']}</a> {pr['title']}
-        {action} in <a href="{server}/{repo}">{repo}</a> by <a href="{server}/{actor}">{actor}</a>
-        """)
+    notify(render_template('pull_request'))
 
 
 if __name__ == "__main__":
