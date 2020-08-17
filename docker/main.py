@@ -53,7 +53,7 @@ def handle_pull_request():
     pr = payload['pull_request']
 
     notify(f"""\
-        PR #<a href="{pr['url']}">{pr['number']}</a> {pr['title']}
+        PR #<a href="{pr['html_url']}">{pr['number']}</a> {pr['title']}
         {action} in <a href="{server}/{repo}">{repo}</a> by <a href="{server}/{actor}">{actor}</a>
         """)
 
