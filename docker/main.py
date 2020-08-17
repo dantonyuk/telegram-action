@@ -25,8 +25,8 @@ def notify(message):
 
 def handle_push():
     payload = event_payload()
-
     env = os.environ
+
     event_name = env['GITHUB_EVENT_NAME']
     repo = env['GITHUB_REPOSITORY']
     server = env['GITHUB_SERVER_URL']
@@ -40,6 +40,22 @@ def handle_push():
         {event_name} in <a href="{server}/{repo}">{repo}</a> by <a href="{server}/{actor}">{actor}</a>
 
         Commits (<a href="{payload['compare']}">Diff</a>):\n""" + commits)
+
+
+def handle_pull_request():
+    payload = event_payload()
+    env = os.environ
+
+    repo = env['GITHUB_REPOSITORY']
+    server = env['GITHUB_SERVER_URL']
+    actor = env['GITHUB_ACTOR']
+    action = payload['action']
+    pr = payload['pull_request']
+
+    notify(f"""\
+        PR #<a href="{pr['url']}">{pr['number']}</a> {pr.title}
+        {action} in <a href="{server}/{repo}">{repo}</a> by <a href="{server}/{actor}">{actor}</a>
+        """)
 
 
 if __name__ == "__main__":
