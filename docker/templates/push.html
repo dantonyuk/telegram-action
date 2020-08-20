@@ -2,5 +2,5 @@ Push into <a href="{{ repository.html_url }}">{{ repository.full_name }}</a> by 
 
 Commits (<a href="{{ compare }}">Diff</a>):
 {% for commit in commits | reverse %}
-<a href="{{ commit.url }}">{{ commit.id | truncate(8, True, '') }}</a> {{ commit.message }}
+<a href="{{ commit.url }}">{{ commit.id | truncate(8, True, '', 0) }}</a> {{ commit.message | lines | first }}
 {% endfor %}
