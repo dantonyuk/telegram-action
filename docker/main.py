@@ -12,6 +12,7 @@ def event_payload():
 def render_template(name):
     env = Environment(
         loader=FileSystemLoader('/templates'),
+        trim_blocks=True,
         filters={
             'lines': lambda value: value.splitlines()
         })
