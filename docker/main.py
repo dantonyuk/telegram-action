@@ -10,12 +10,8 @@ def event_payload():
 
 
 def render_template(name):
-    env = Environment(
-        loader=FileSystemLoader('/templates'),
-        trim_blocks=True,
-        filters={
-            'lines': lambda value: [line for line in value.splitlines() if line]
-        })
+    env = Environment(loader=FileSystemLoader('/templates'), trim_blocks=True)
+    env.filters['lines'] = lambda value: [line for line in value.splitlines() if line]
     template = env.get_template(name + '.html')
     return template.render(**event_payload())
 
