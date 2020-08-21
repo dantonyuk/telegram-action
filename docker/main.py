@@ -14,7 +14,7 @@ def render_template(name):
         loader=FileSystemLoader('/templates'),
         trim_blocks=True,
         filters={
-            'lines': lambda value: value.splitlines()
+            'lines': lambda value: [line for line in value.splitlines() if line]
         })
     template = env.get_template(name + '.html')
     return template.render(**event_payload())
