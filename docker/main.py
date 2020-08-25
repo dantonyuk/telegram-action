@@ -12,8 +12,15 @@ def event_payload():
 def render_template(name):
     env = Environment(loader=FileSystemLoader('/templates'), trim_blocks=True)
     env.filters['lines'] = lambda value: [line for line in value.splitlines() if line]
-    template = env.get_template(name + '.html')
-    return template.render(**event_payload())
+
+    payload = event_payload()
+    action = payload.get('action')
+    try:
+        template = env.get_template(f'{name}_{action}.html')
+    except:
+        template = env.get_template(f'{name}.html')
+
+    return template.render(**payload)
 
 
 def notify(message):
