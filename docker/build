@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cd $(dirname $0)
+
 ACCOUNT=dmitryantonyuk
 IMAGE=telegram-action
 TAG=1.0.0
