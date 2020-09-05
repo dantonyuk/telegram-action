@@ -22,3 +22,10 @@ jobs:
         destination: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
 ```
+
+## Supported Event
+
+* push
+* pull_request
+* issues
+* issue_comment
