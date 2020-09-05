@@ -20,6 +20,7 @@ def render_template(name):
     except:
         template = env.get_template(f'{name}.html')
 
+    print(f"{payload}")
     return template.render(**payload)
 
 
@@ -44,6 +45,14 @@ def handle_push():
 
 def handle_pull_request():
     notify(render_template('pull_request'))
+
+
+def handle_issues():
+    notify(render_template('issues'))
+
+
+def handle_issue_comment():
+    notify(render_template('issue_comment'))
 
 
 if __name__ == "__main__":
