@@ -1,9 +1,9 @@
 import os, sys, inspect
+import json
 from jinja2 import Environment, FileSystemLoader
 from pathlib import Path
 
 def event_payload():
-    import json
     event_path = os.environ['GITHUB_EVENT_PATH']
     contents = Path(event_path).read_text()
     return json.loads(contents)
@@ -20,7 +20,7 @@ def render_template(name):
     except:
         template = env.get_template(f'{name}.html')
 
-    print(f"{payload}")
+    print(json.dumps(payload, indent=2))
     return template.render(**payload)
 
 
