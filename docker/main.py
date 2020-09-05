@@ -2,6 +2,7 @@ import os, sys, inspect
 import json
 from jinja2 import Environment, FileSystemLoader
 from pathlib import Path
+import re
 
 def event_payload():
     event_path = os.environ['GITHUB_EVENT_PATH']
@@ -28,15 +29,16 @@ def notify(message):
     import requests
     import textwrap
 
-    chat_id = os.environ['INPUT_DESTINATION']
+    chat_ids = re.split(',\s*', os.environ['INPUT_DESTINATION'])
     token = os.environ['INPUT_TOKEN']
 
-    requests.post(f'https://api.telegram.org/bot{token}/sendMessage', json={
-        'chat_id': chat_id,
-        'parse_mode': 'HTML',
-        'disable_web_page_preview': True,
-        'text': textwrap.dedent(message)
-    })
+    for chat_id in chat_ids:
+        requests.post(f'https://api.telegram.org/bot{token}/sendMessage', json={
+            'chat_id': chat_id,
+            'parse_mode': 'HTML',
+            'disable_web_page_preview': True,
+            'text': textwrap.dedent(message)
+        })
 
 
 def handle_push():
