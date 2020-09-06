@@ -1,5 +1,6 @@
 Issue #<a href="{{ issue.html_url }}">{{ issue.number }}</a> {{ issue.title }}
-{{ action }} in <a href="{{ repository.html_url }}">{{ repository.full_name }}</a> by <a href="{{ issue.user.html_url }}">{{ issue.user.login }}</a>
+in <a href="{{ repository.html_url }}">{{ repository.full_name }}</a> by <a href="{{ issue.user.html_url }}">{{ issue.user.login }}</a>
+
 Unassigned <a href="{{ assignee.html_url }}">{{ assignee.login }}</a>
 
 {% if issue.assignees %}

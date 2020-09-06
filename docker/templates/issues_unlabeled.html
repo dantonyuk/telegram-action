@@ -1,6 +1,7 @@
 Issue #<a href="{{ issue.html_url }}">{{ issue.number }}</a> {{ issue.title }}
-{{ action }} in <a href="{{ repository.html_url }}">{{ repository.full_name }}</a> by <a href="{{ issue.user.html_url }}">{{ issue.user.login }}</a>
-Removed label: {{ label.name }}
+in <a href="{{ repository.html_url }}">{{ repository.full_name }}</a> by <a href="{{ issue.user.html_url }}">{{ issue.user.login }}</a>
+
+Removed label "{{ label.name }}"
 
 {% if issue.assignees %}
 Assignees: {% for assignee in issue.assignees %}<a href="{{ assignee.html_url }}">{{ assignee.login }}</a>{{ ", " if not loop.last }}{% endfor %}
