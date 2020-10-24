@@ -1,3 +1,4 @@
 PR #<a href="{{ pull_request.html_url }}">{{ pull_request.number }}</a> {{ pull_request.title }}
-from <a href="{{ pull_request.head.repo.html_url }}/tree/{{ pull_request.head.ref }}">{{ pull_request.head.ref }}</a> to <a href="{{ pull_request.base.repo.html_url }}/tree/{{ pull_request.base.ref }}">{{ pull_request.base.ref }}</a>
-Review {{ action }}: {{ review.state }} in <a href="{{ repository.html_url }}">{{ repository.full_name }}</a> by <a href="{{ sender.html_url }}">{{ sender.login }}</a>
+from <a href="{{ pull_request.head.repo.html_url }}/tree/{{ pull_request.head.ref }}">{{ pull_request.head.ref }}</a> to <a href="{{ pull_request.base.repo.html_url }}/tree/{{ pull_request.base.ref }}">{{ pull_request.base.ref }}</a> in <a href="{{ repository.html_url }}">{{ repository.full_name }}</a>
+
+Review {{ action }}: {{ review.state }} by <a href="{{ sender.html_url }}">{{ sender.login }}</a>

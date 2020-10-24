@@ -1,4 +1,6 @@
-<a href="{{ comment.html_url }}">Comment</a> on issue #<a href="{{ issue.html_url }}">{{ issue.number }}</a> {{ issue.title }} was {{ action }}
-in <a href="{{ repository.html_url }}">{{ repository.full_name }}</a> by <a href="{{ comment.user.html_url }}">{{ comment.user.login }}</a>
+Issue #<a href="{{ issue.html_url }}">{{ issue.number }}</a> {{ issue.title }}
+in <a href="{{ repository.html_url }}">{{ repository.full_name }}</a>
+
+<a href="{{ comment.html_url }}">Comment</a> was {{ action }} by <a href="{{ comment.user.html_url }}">{{ comment.user.login }}</a>
 
 {{ body }}
