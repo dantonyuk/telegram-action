@@ -49,6 +49,10 @@ def handle_pull_request():
     notify(render_template('pull_request'))
 
 
+def handle_pull_request_review():
+    notify(render_template('pull_request_review'))
+
+
 def handle_issues():
     notify(render_template('issues'))
 
