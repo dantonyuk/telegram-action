@@ -27,5 +27,6 @@ jobs:
 
 * push
 * pull_request
+* pull_request_review
 * issues
 * issue_comment
