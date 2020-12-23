@@ -4,6 +4,14 @@ from jinja2 import Environment, FileSystemLoader
 from pathlib import Path
 import re
 
+SUPPORTED_EVENTS = [
+    "push",
+    "pull_request",
+    "pull_request_review",
+    "issues",
+    "issue_comment",
+]
+
 def event_payload():
     event_path = os.environ['GITHUB_EVENT_PATH']
     contents = Path(event_path).read_text()
@@ -41,35 +49,13 @@ def notify(message):
         })
 
 
-def handle_push():
-    notify(render_template('push'))
-
-
-def handle_pull_request():
-    notify(render_template('pull_request'))
-
-
-def handle_pull_request_review():
-    notify(render_template('pull_request_review'))
-
-
-def handle_issues():
-    notify(render_template('issues'))
-
-
-def handle_issue_comment():
-    notify(render_template('issue_comment'))
-
-
 if __name__ == "__main__":
     env = os.environ
     event_name = os.environ['GITHUB_EVENT_NAME']
 
     members = inspect.getmembers(sys.modules[__name__])
-    func_name = f'handle_{event_name}'
-    funcs = [obj for name, obj in members if name == func_name]
-    if funcs:
-        funcs[0]()
+    if event_name in SUPPORTED_EVENTS:
+        notify(render_template(event_name))
     else:
         repo = env['GITHUB_REPOSITORY']
         server = env['GITHUB_SERVER_URL']
