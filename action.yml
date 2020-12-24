@@ -9,4 +9,4 @@ inputs:
     description: Bot token to be used to send notifications
 runs:
   using: 'docker'
-  image: 'Dockerfile'
+  image: 'docker://dmitryantonyuk/telegram-action:latest'
