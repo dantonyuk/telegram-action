@@ -1,6 +1,6 @@
 # Telegram Notifier
 
-[![Actions Status](https://github.com/dmitry-at-hyla/telegram-action/workflows/Notify/badge.svg)](https://github.com/dmitry-at-hyla/telegram-action/actions)
+[![Actions Status](https://github.com/dantonyuk/telegram-action/workflows/Notify/badge.svg)](https://github.com/dantonyuk/telegram-action/actions)
 
 Github action to send notification to Telegram about Github events.
 
@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
-    - uses: dmitry-at-hyla/telegram-action@master
+    - uses: dantonyuk/telegram-action@master
       with:
         destination: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}

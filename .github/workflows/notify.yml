@@ -13,7 +13,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - uses: dmitry-at-hyla/telegram-action@master
+    - uses: dantonyuk/telegram-action@master
       with:
         token: ${{ secrets.TELEGRAM_TOKEN }}
         destination: ${{ secrets.TELEGRAM_TO }}
