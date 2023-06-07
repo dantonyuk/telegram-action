@@ -3,6 +3,8 @@ import json
 from jinja2 import Environment, FileSystemLoader
 from pathlib import Path
 import re
+import requests
+import textwrap
 
 SUPPORTED_EVENTS = [
     "push",
@@ -34,9 +36,6 @@ def render_template(name):
 
 
 def notify(message):
-    import requests
-    import textwrap
-
     chat_ids = re.split(',\s*', os.environ['INPUT_DESTINATION'])
     token = os.environ['INPUT_TOKEN']
 
