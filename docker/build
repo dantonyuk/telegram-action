@@ -6,7 +6,7 @@ ACCOUNT=dmitryantonyuk
 IMAGE=telegram-action
 TAG=1.0.0
 
-docker build -t ${ACCOUNT}/${IMAGE} .
+docker build --platform linux/amd64 --tag ${ACCOUNT}/${IMAGE} .
 docker tag ${ACCOUNT}/${IMAGE}:latest ${ACCOUNT}/${IMAGE}:${TAG}
 docker push ${ACCOUNT}/${IMAGE}:${TAG}
 docker push ${ACCOUNT}/${IMAGE}:latest
